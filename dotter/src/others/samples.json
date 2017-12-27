@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Bottom Left Triangle",
+    "image": "./src/images/lower_triangle.png",
+    "pattern": {
+      "n": "11",
+      "rows": "n",
+      "columns": "n",
+      "condition": "y >= x"
+    }
+  },
+  {
+    "name": "Top Left Triangle",
+    "image": "./src/images/top_left_triangle.png",
+    "pattern": {
+      "n": "11",
+      "rows": "n",
+      "columns": "n",
+      "condition": "y<=columns-1-x"
+    }
+  },
+  {
+    "name": "Down Arrow",
+    "image": "./src/images/down_arrow.png",
+    "pattern": {
+      "n": "9",
+      "rows": "n",
+      "columns": "n*2-1",
+      "condition": "//divide into two small triangles\nx >= y //left triangle\n&&\nx <= columns-1 - y //right triangle"
+    }
+  },
+  {
+    "name": "Up Arrow",
+    "image": "./src/images/up_arrow.png",
+    "pattern": {
+      "n": "9",
+      "rows": "n",
+      "columns": "n*2-1",
+      "condition": "//divide into two small triangles\n//left triangle\nx>=rows-1-y\n&&\n//rigt triangle\nx<=y+n-1"
+    }
+  },
+  {
+    "name": "X",
+    "image": "./src/images/X.png",
+    "pattern": {
+      "n": "15",
+      "rows": "n",
+      "columns": "n",
+      "condition": "//top-left to bottom-right\ny==x\n||\n//bottom-left to top-right\ny==columns-1-x"
+    }
+  },
+  {
+    "name": "Bold X",
+    "image": "./src/images/bold_x.png",
+    "pattern": {
+      "n": "31",
+      "rows": "n",
+      "columns": "n+4",
+      "condition": "x>=y && x<=y+4\n||\nx<=columns-1-y && x>=columns-1-y-4"
+    }
+  },
+  {
+    "name": "Diamond",
+    "image": "./src/images/diamond.png",
+    "pattern": {
+      "n": "9",
+      "rows": "n*2-1",
+      "columns": "n*2-1",
+      "condition": "//Up Arrow\nx>=n-1-y && x<=y+n-1\n&&\n//Down Arrow\nx>=y-(n-1) && x<=3*(n-1)-y"
+    }
+  },
+  {
+    "name": "Circle",
+    "image": "./src/images/circle.png",
+    "pattern": {
+      "n": "44",
+      "rows": "n*2+1",
+      "columns": "n*2+1",
+      "condition": "(x-n)*(x-n)+(y-n)*(y-n)<=n*n"
+    }
+  },
+  {
+    "name": "Fish",
+    "image": "./src/images/fish.png",
+    "pattern": {
+      "n": "14",
+      "rows": "n*2-1",
+      "columns": "n*3-2",
+      "condition": "x==n-1-y\n|| x==y-(n-1)\n|| x==y+n-1\n|| x==columns-1-y\n//eye\n|| x==n*5/7 && y==n*5/7"
+    }
+  }
+]

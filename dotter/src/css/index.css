@@ -1,0 +1,131 @@
+
+body {
+  background-color: #eaeaea;
+  font-size: medium;
+  overflow-x: scroll;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  overflow-y: hidden;
+  width: inherit;
+  overflow-x: scroll;
+}
+
+.samples-container {
+  overflow-y: scroll;
+  width: 300px;
+  min-width: 300px;
+  border-right: 2px #bbbbbb solid;
+}
+
+.samples-container-title {
+  font-size: 18px;
+  margin: 0 20px;
+}
+
+.workspace {
+  /*border: 1px solid red;*/
+  padding: 0 20px;
+  margin: 0;
+  flex: 1;
+  min-width: 830px;
+  overflow-y: scroll;
+}
+
+.input-values-table tr td:first-child {
+  text-align: left;
+}
+
+.input-values-table tr td input, label {
+  font-family: monospace;
+  font-size: large;
+}
+
+.for-loops {
+  font-family: monospace;
+  font-size: large;
+}
+
+.input-condition {
+  margin-top: -2em;
+  margin-bottom: -1em;
+  margin-left: 6ch;
+  width: 43.5ch;
+}
+
+.input-condition textarea {
+  min-height: 1em;
+  font-family: monospace;
+  height: 5em;
+}
+
+.input-expression-info {
+  width: 350px;
+  padding-left: 20px;
+  /*border: 1px solid black;*/
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.3rem;
+}
+
+.input-condition, .input-rows, .input-columns, .input-n {
+  color: #000088;
+}
+
+/*Run button*/
+#run {
+  width: 100px;
+}
+
+#canvasContainer {
+  margin-top: 10px;
+  /*resize: horizontal;*/
+  /*overflow: visible;*/
+  /*width: 51ch;*/
+  /*height: 26ch;*/
+}
+
+.canvas {
+  border: 1px solid black;
+  background-color: white;
+  /*width: 100%;*/
+}
+
+.display-none {
+  display: none;
+}
+
+.sample-card {
+  margin: 0 20px 20px;
+  width: 256px;
+  height: 256px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Likely future */
+}
+
+.sample-card:hover {
+  cursor: pointer;
+}
+
+.sample-card > .mdl-card__actions {
+  height: 40px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+.sample-card-name {
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  text-shadow: 0px 0px 3px white;
+
+}

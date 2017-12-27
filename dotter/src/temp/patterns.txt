@@ -1,0 +1,29 @@
+
+X pattern
+r==c || r == n-c+1
+?
+y==x || y==-x+n-1
+
+borders
+r==1 || c==1 || r==rows || c==columns
+?
+   y==0                 // top
+|| y==rows-1            //bottom
+
+|| x==0                 //left
+|| x== columns-1        //right
+
+
+^ up triangle border
+c = 2*n-1
+r==n-c+1 || r== c-n+1
+?
+x == -y +n-1
+||
+x==y+n-1
+
+
+
+
+----------------------------
+-1
