@@ -220,6 +220,23 @@ $("#printPatternJson").click(function (event) {
   console.log(JSON.stringify(pattern));
 });
 
+$("#btnSendFeedback").click(function () {
+  console.log("feedback click");
+  
+  var feedbackStr = $("#inputFeedback").val().trim();
+  if (!feedbackStr) {
+    console.log("empty feedback");
+    $('#feedbackContainer').addClass("is-invalid");
+    return;
+  }
+  
+  sendFeedback(feedbackStr);
+  
+  $("#inputFeedback").val("");
+  
+  showToast("Thanks for your feedback");
+});
+
 function printOutput(text) {
   $('#output').html(text);
 }

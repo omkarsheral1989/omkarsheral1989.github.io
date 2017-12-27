@@ -61,6 +61,21 @@ body {
   height: 5em;
 }
 
+.input-feedback {
+  margin-top: 1em;
+  margin-left: 0ch;
+  width: 439px;
+}
+
+.input-feedback textarea {
+  min-height: 1em;
+  height: 5em;
+}
+
+#btnSendFeedback{
+  margin-bottom: 20px;
+}
+
 .input-expression-info {
   width: 350px;
   padding-left: 20px;
@@ -128,5 +143,4 @@ body {
   font-size: 18px;
   font-weight: 500;
   text-shadow: 0px 0px 3px white;
-
 }

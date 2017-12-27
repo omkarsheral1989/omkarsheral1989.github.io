@@ -188,6 +188,21 @@ for (var y=0; y &lt; rows; y++) {
       <div id="canvasContainer">
         <canvas id="canvas" class="canvas"></canvas>
       </div>
+      
+      <!--Feedback-->
+      <div class="input-feedback mdl-textfield mdl-js-textfield" id="feedbackContainer">
+        <textarea class="mdl-textfield__input" placeholder="Please provide the feedback / suggestions/ improvements"
+                  id="inputFeedback"></textarea>
+        <label class="mdl-textfield__label" for="inputFeedback"></label>
+        <span class="mdl-textfield__error">Please enter feedback</span>
+      </div>
+      <div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+                id="btnSendFeedback">
+          Send feedback
+        </button>
+      </div>
+    
     </div>
   
   </div>
@@ -199,7 +214,9 @@ for (var y=0; y &lt; rows; y++) {
   <button class="mdl-snackbar__action" type="button"></button>
 </div>
 
-<!-- <script defer src="/src/js/material.min.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-database.js"></script>
+
 <script src="./src/js/app.js"></script>
 <script src="./src/js/index.js"></script>
 
