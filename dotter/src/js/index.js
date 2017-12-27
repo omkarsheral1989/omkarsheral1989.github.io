@@ -180,7 +180,6 @@ function displaySamples() {
     clone.click(function () {
       console.log("sample click", sample.name);
       displayPattern(sample.pattern);
-      showToast("displaying " + sample.name);
     });
     
     clone.appendTo(samplesContainer);
