@@ -82,11 +82,6 @@
   {
     "name": "Fish",
     "image": "./src/images/fish.png",
-    "pattern": {
-      "n": "14",
-      "rows": "n*2-1",
-      "columns": "n*3-2",
-      "condition": "x==n-1-y\n|| x==y-(n-1)\n|| x==y+n-1\n|| x==columns-1-y\n//eye\n|| x==n*5/7 && y==n*5/7"
-    }
+    "pattern": {"n":"14","rows":"n*2-1","columns":"n*3-2","condition":"x==n-1-y\n|| x==y-(n-1)\n|| x==y+n-1\n|| x==columns-1-y\n|| x==columns-1\n//eye\n|| x==n*5/7 && y==n*5/7"}
   }
 ]
