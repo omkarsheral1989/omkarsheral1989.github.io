@@ -72,7 +72,7 @@ body {
   height: 5em;
 }
 
-#btnSendFeedback{
+#btnSendFeedback {
   margin-bottom: 20px;
 }
 
@@ -134,7 +134,7 @@ body {
 .sample-card > .mdl-card__actions {
   height: 40px;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.5);
+  /*background: rgba(255, 255, 255, 0.2);*/
   text-align: center;
 }
 
@@ -142,5 +142,18 @@ body {
   color: #000;
   font-size: 18px;
   font-weight: 500;
-  text-shadow: 0px 0px 3px white;
+  text-shadow: 0px 0px 7px white,
+  0px 0px 5px white,
+  0px 0px 5px white,
+  0px 0px 7px white,
+  0px 0px 7px white,
+  0px 0px 30px white,
+  0px 0px 30px white,
+  0px 0px 30px white,
+  0px 0px 30px white,
+  0px 0px 30px white,
+  0px 0px 30px white,
+  0px 0px 30px white,
+  0px 0px 30px white,
+  0px 0px 10px white;
 }
