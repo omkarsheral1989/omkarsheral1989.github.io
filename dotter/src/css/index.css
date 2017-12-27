@@ -81,6 +81,7 @@ body {
 
 #canvasContainer {
   margin-top: 10px;
+  margin-bottom: 20px;
   /*resize: horizontal;*/
   /*overflow: visible;*/
   /*width: 51ch;*/

@@ -194,6 +194,10 @@ function displayPattern(pattern) {
   run();
 }
 
+$(".not-implemented").click(function () {
+  showToast("work in progress");
+});
+
 function showToast(message) {
   var data = {message: message};
   $("#snackbar").get(0).MaterialSnackbar.showSnackbar(data);
