@@ -70,6 +70,16 @@
     }
   },
   {
+    "name": "Alternate Diamond",
+    "image": "./src/images/alternate_diamond.png",
+    "pattern": {
+      "n": "20",
+      "rows": "n*2-1",
+      "columns": "n*2-1",
+      "condition": "//select only alternate x, y\n(x+y)%2==0\n//Up triangle\n&&\nx>=n-1-y && x<=y+n-1\n&&\n//Down Triangle\nx>=y-(n-1) && x<=3*(n-1)-y"
+    }
+  },
+  {
     "name": "Circle",
     "image": "./src/images/circle.png",
     "pattern": {
@@ -82,6 +92,11 @@
   {
     "name": "Fish",
     "image": "./src/images/fish.png",
-    "pattern": {"n":"14","rows":"n*2-1","columns":"n*3-2","condition":"x==n-1-y\n|| x==y-(n-1)\n|| x==y+n-1\n|| x==columns-1-y\n|| x==columns-1\n//eye\n|| x==n*5/7 && y==n*5/7"}
+    "pattern": {
+      "n": "14",
+      "rows": "n*2-1",
+      "columns": "n*3-2",
+      "condition": "x==n-1-y\n|| x==y-(n-1)\n|| x==y+n-1\n|| x==columns-1-y\n|| x==columns-1\n//eye\n|| x==n*5/7 && y==n*5/7"
+    }
   }
 ]

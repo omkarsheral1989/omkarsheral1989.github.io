@@ -5,6 +5,8 @@ var canvas = document.getElementById('canvas');
 // canvas.width = document.getElementById('canvasContainer').clientWidth/2;
 canvas.width = 439;
 
+$("#printPatternJson").addClass("display-none");
+
 
 $(document).ready(function () {
   run();
