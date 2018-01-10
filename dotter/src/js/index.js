@@ -5,7 +5,7 @@ var canvas = document.getElementById('canvas');
 // canvas.width = document.getElementById('canvasContainer').clientWidth/2;
 canvas.width = 439;
 
-$("#printPatternJson").addClass("display-none");
+$("#printPatternJson").hide();
 
 
 $(document).ready(function () {
@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 var n, rows, columns;
 
-jQuery('#run').click(function (event) {
+jQuery('#run').click(function () {
   console.log('click');
   run();
 });
@@ -150,10 +150,6 @@ function drawDots(patternArray) {
     }
   }
   
-  function resizeCanvas() {
-    
-  };
-  
   function drawCircle(canvasCtx, centreX, centreY, radius, color) {
     canvasCtx.beginPath();
     canvasCtx.arc(centreX, centreY, radius, 0, 2 * Math.PI);
@@ -203,10 +199,10 @@ $(".not-implemented").click(function () {
 function showToast(message) {
   var data = {message: message};
   $("#snackbar").get(0).MaterialSnackbar.showSnackbar(data);
-};
+}
 
 
-$("#printPatternJson").click(function (event) {
+$("#printPatternJson").click(function () {
   var n = $('#n').val();
   var rows = $('#r').val();
   var columns = $('#c').val();
@@ -238,7 +234,3 @@ $("#btnSendFeedback").click(function () {
   
   showToast("Thanks for your feedback");
 });
-
-function printOutput(text) {
-  $('#output').html(text);
-}
