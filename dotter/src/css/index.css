@@ -125,10 +125,16 @@ body {
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Likely future */
+
+  cursor: pointer;
+  transition: all 200ms;
+  -moz-transition: all 200ms;
+  -o-transition: all 200ms;
 }
 
 .sample-card:hover {
-  cursor: pointer;
+  box-shadow: 0 5px 24px 2px rgba(0, 0, 0, .3);
+  transform: scale(1.02, 1.02);
 }
 
 .sample-card > .mdl-card__actions {
