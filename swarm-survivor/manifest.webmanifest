@@ -2,6 +2,7 @@
   "name": "Swarm Survivor",
   "short_name": "Swarm Survivor",
   "description": "A neon top-down horde survival shooter.",
+  "id": "/swarm-survivor/app",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
