@@ -5,6 +5,8 @@
 
 // Bump the version to drop old caches after changing this file's strategy.
 const CACHE = 'swarm-survivor-v1';
+// The origin is shared with other apps, so cleanup must only touch our caches.
+const CACHE_PREFIX = 'swarm-survivor';
 
 self.addEventListener('install', () => self.skipWaiting());
 
@@ -14,7 +16,9 @@ self.addEventListener('activate', (event) => {
       .keys()
       .then((keys) =>
         Promise.all(
-          keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)),
+          keys
+            .filter((k) => k.startsWith(CACHE_PREFIX) && k !== CACHE)
+            .map((k) => caches.delete(k)),
         ),
       )
       .then(() => self.clients.claim()),
