@@ -1,15 +1,38 @@
-// Minimal service worker. It makes the app installable and lets it run offline
-// after the first visit by caching same-origin files as they are fetched.
-// Build output filenames are content-hashed, so stale-while-revalidate is safe.
-// A fuller precache and "update available" flow is planned for M3.
+// Stores every file of the build at install, so the game runs offline after one
+// visit, whichever renderer chunks this phone happens to need. Pages still try
+// the network first, so a new deploy shows up on the next open.
 
-// Bump the version to drop old caches after changing this file's strategy.
-const CACHE = 'swarm-survivor-v1';
+// Both are filled in by scripts/swPrecachePlugin.ts at build time.
+const BUILD_ID = '73e7e7e24300';
+const PRECACHE_FILES = ["assets/CanvasPool-C3ggLJAc.js","assets/RenderTargetSystem-DqHIPho1.js","assets/browserAll-BqfWeNuT.js","assets/canvasUtils-B9YoTnMf.js","assets/getTexelRangeRects-zF5qMI0w.js","assets/getTextureBatchBindGroup-B17mK7lz.js","assets/index-DPAIQUpu.css","assets/index-EEtckk1P.js","assets/init-C3AM1KU_.js","assets/levelUpScreen-nqs9jbUu.js","assets/settingsScreen-DG_myADb.js","assets/upgradesScreen-BakoH38e.js","assets/webworkerAll-BlN17Akx.js","icons/apple-touch-icon.png","icons/icon-192.png","icons/icon-512.png","icons/icon-maskable-512.png","index.html","manifest.webmanifest"];
+
 // The origin is shared with other apps, so cleanup must only touch our caches.
 const CACHE_PREFIX = 'swarm-survivor';
+const CACHE = `${CACHE_PREFIX}-${BUILD_ID}`;
 
-self.addEventListener('install', () => self.skipWaiting());
+// How long a page waits for the network before using the stored copy, in
+// milliseconds. Lower starts faster on a poor connection, but a new deploy is
+// more likely to wait for the next open.
+const PAGE_TIMEOUT_MS = 3000;
 
+const pageUrl = () => self.registration.scope;
+
+self.addEventListener('install', (event) => {
+  const urls = PRECACHE_FILES.map((file) =>
+    file === 'index.html' ? pageUrl() : new URL(file, pageUrl()).href,
+  );
+  event.waitUntil(
+    caches
+      .open(CACHE)
+      // 'reload' skips the HTTP cache, which could hold files of an older deploy.
+      .then((cache) =>
+        cache.addAll(urls.map((url) => new Request(url, { cache: 'reload' }))),
+      )
+      .then(() => self.skipWaiting()),
+  );
+});
+
+// Every deploy has its own cache, so this also removes the old hashed files.
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches
@@ -25,41 +48,45 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+function waitForTimeout() {
+  return new Promise((resolve) =>
+    setTimeout(() => resolve(null), PAGE_TIMEOUT_MS),
+  );
+}
+
+async function servePage(event) {
+  const { request } = event;
+  const cache = await caches.open(CACHE);
+  const network = fetch(request).then((response) => {
+    // A failed response must never replace the working copy.
+    if (response.ok) event.waitUntil(cache.put(pageUrl(), response.clone()));
+    return response;
+  });
+  const first = await Promise.race([
+    network.catch(() => null),
+    waitForTimeout(),
+  ]);
+  if (first && first.ok) return first;
+  // Slow, offline or failing: use the stored copy, if there is one yet.
+  return (await cache.match(pageUrl())) || network;
+}
+
+async function serveFile(request) {
+  const cache = await caches.open(CACHE);
+  // A file's URL is all that identifies it, whatever the server's Vary header
+  // says. Without this a server sending "Vary: Origin" misses for module scripts.
+  const hit = await cache.match(request, { ignoreVary: true });
+  if (hit) return hit;
+  const response = await fetch(request);
+  if (response.ok) await cache.put(request, response.clone());
+  return response;
+}
+
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
-  if (new URL(request.url).origin !== self.location.origin) return;
-
-  // Pages go to the network first so a new deploy shows up on the next open;
-  // the cached copy is only the offline fallback.
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE).then((cache) => cache.put(request, copy));
-          return response;
-        })
-        .catch(() =>
-          caches
-            .match(request)
-            .then((hit) => hit || caches.match(self.registration.scope)),
-        ),
-    );
-    return;
-  }
-
-  // Everything else: serve the cache at once, refresh it in the background.
+  if (!request.url.startsWith(pageUrl())) return;
   event.respondWith(
-    caches.open(CACHE).then(async (cache) => {
-      const hit = await cache.match(request);
-      const refresh = fetch(request)
-        .then((response) => {
-          if (response.ok) cache.put(request, response.clone());
-          return response;
-        })
-        .catch(() => hit);
-      return hit || refresh;
-    }),
+    request.mode === 'navigate' ? servePage(event) : serveFile(request),
   );
 });
