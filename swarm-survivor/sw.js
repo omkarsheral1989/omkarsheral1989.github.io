@@ -3,8 +3,10 @@
 // the network first, so a new deploy shows up on the next open.
 
 // Both are filled in by scripts/swPrecachePlugin.ts at build time.
-const BUILD_ID = '1c0b7344b9fe';
-const PRECACHE_FILES = ["assets/CanvasPool-C3ggLJAc.js","assets/RenderTargetSystem-DqHIPho1.js","assets/browserAll-B2dDus8G.js","assets/canvasUtils-B9YoTnMf.js","assets/getTexelRangeRects-zF5qMI0w.js","assets/getTextureBatchBindGroup-B17mK7lz.js","assets/index-BWnl391Q.css","assets/index-Dj4nb6IU.js","assets/init-C3AM1KU_.js","assets/levelUpScreen-Vj6xTQ1B.js","assets/settingsScreen-CzVElf7d.js","assets/upgradesScreen-I0mF30A0.js","assets/webworkerAll-DNpFhD9k.js","icons/apple-touch-icon.png","icons/icon-192.png","icons/icon-512.png","icons/icon-maskable-512.png","index.html","manifest.webmanifest"];
+const BUILD_ID = '0a96a6f5ecd6';
+const PRECACHE_FILES = ["assets/CanvasPool-C3ggLJAc.js","assets/RenderTargetSystem-DqHIPho1.js","assets/browserAll-B1GB2Umi.js","assets/canvasUtils-B9YoTnMf.js","assets/getTexelRangeRects-zF5qMI0w.js","assets/getTextureBatchBindGroup-B17mK7lz.js","assets/index-D-TrW9TL.css","assets/index-OahE9Zy3.js","assets/init-C3AM1KU_.js","assets/levelUpScreen-Bw_HgdYD.js","assets/settingsScreen-R8Wh5nLF.js","assets/upgradesScreen-CRQtMu0V.js","assets/webworkerAll-D0iZlqCp.js","icons/apple-touch-icon.png","icons/icon-192.png","icons/icon-512.png","icons/icon-maskable-512.png","index.html","manifest.webmanifest"];
+// The build's version text, which the page compares with its own to tell a new version is ready.
+const APP_VERSION = "9ce2e44, built 2026-11-09 17:46 UTC";
 
 // The origin is shared with other apps, so cleanup must only touch our caches.
 const CACHE_PREFIX = 'swarm-survivor';
@@ -81,6 +83,13 @@ async function serveFile(request) {
   if (response.ok) await cache.put(request, response.clone());
   return response;
 }
+
+// The page asks which build this worker belongs to, to find out whether it is out of date.
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'version' && event.ports[0]) {
+    event.ports[0].postMessage(APP_VERSION);
+  }
+});
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
