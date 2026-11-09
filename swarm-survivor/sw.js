@@ -3,8 +3,8 @@
 // the network first, so a new deploy shows up on the next open.
 
 // Both are filled in by scripts/swPrecachePlugin.ts at build time.
-const BUILD_ID = '7f7588e8b28c';
-const PRECACHE_FILES = ["assets/CanvasPool-C3ggLJAc.js","assets/RenderTargetSystem-DqHIPho1.js","assets/browserAll-B5DUx5sB.js","assets/canvasUtils-B9YoTnMf.js","assets/getTexelRangeRects-zF5qMI0w.js","assets/getTextureBatchBindGroup-B17mK7lz.js","assets/index-BWnl391Q.css","assets/index-CVCo7PLV.js","assets/init-C3AM1KU_.js","assets/levelUpScreen-DPG_ixbB.js","assets/settingsScreen-CvS0aWiV.js","assets/upgradesScreen-N9B_KuYA.js","assets/webworkerAll-Dy4Jcbsh.js","icons/apple-touch-icon.png","icons/icon-192.png","icons/icon-512.png","icons/icon-maskable-512.png","index.html","manifest.webmanifest"];
+const BUILD_ID = '0d1d61f20a55';
+const PRECACHE_FILES = ["assets/CanvasPool-C3ggLJAc.js","assets/RenderTargetSystem-DqHIPho1.js","assets/browserAll-BbWBKa1g.js","assets/canvasUtils-B9YoTnMf.js","assets/getTexelRangeRects-zF5qMI0w.js","assets/getTextureBatchBindGroup-B17mK7lz.js","assets/index-BWnl391Q.css","assets/index-Ba-35ept.js","assets/init-C3AM1KU_.js","assets/levelUpScreen-MecBCUKi.js","assets/settingsScreen-BD3XMY2i.js","assets/upgradesScreen-CQnrG8PQ.js","assets/webworkerAll-UB94ZaiL.js","icons/apple-touch-icon.png","icons/icon-192.png","icons/icon-512.png","icons/icon-maskable-512.png","index.html","manifest.webmanifest"];
 
 // The origin is shared with other apps, so cleanup must only touch our caches.
 const CACHE_PREFIX = 'swarm-survivor';
